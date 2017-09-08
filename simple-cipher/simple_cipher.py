@@ -1,6 +1,8 @@
 import re
 import random
 import string
+from typing import Callable
+from operator import add, sub
 
 class Cipher(object):
     def __init__(self, key: str=''):
@@ -11,19 +13,15 @@ class Cipher(object):
         else:
             self.key = key
 
-    def encode(self, plaintext: str) -> str:
+    def encode(self, plaintext: str, dirn: Callable=add) -> str:
         alc = string.ascii_lowercase
         e_key = self.key if len(self.key) >= len(plaintext) else self.key * (len(plaintext) // len(self.key) + 1)
         temp = zip(plaintext, e_key)
-        step1 = [(alc.index(v1)+alc.index(v2))%26 for v1, v2 in temp]
+        step1 = [dirn(alc.index(v1), alc.index(v2))%26 for v1, v2 in temp]
         return ''.join(alc[i] for i in step1)
 
     def decode(self, ciphertext: str) -> str:
-        alc = string.ascii_lowercase
-        d_key = self.key if len(self.key) >= len(ciphertext) else self.key * (len(ciphertext) // len(self.key) + 1)
-        temp = zip(ciphertext, d_key)
-        step1 = [(alc.index(v1)-alc.index(v2))%26 for v1, v2 in temp]
-        return ''.join(alc[i] for i in step1)
+        return self.encode(plaintext=ciphertext, dirn=sub)
 
 
 class Caesar(object):
