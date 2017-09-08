@@ -4,7 +4,7 @@ import string
 
 class Cipher(object):
     def __init__(self, key: str=''):
-        if any(s.isdigit() or s.isupper() for s in key):
+        if not all(s.isalpha() and s.islower() for s in key):
             raise ValueError("No digit or capital letter allowed in the key")
         if len(key) == 0:
             self.key = ''.join(random.choices(string.ascii_lowercase, k=100))
