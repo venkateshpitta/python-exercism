@@ -24,14 +24,13 @@ class Cipher(object):
         return self.encode(plaintext=ciphertext, dirn=sub)
 
 
-class Caesar(object):
+class Caesar(Cipher):
     def __init__(self):
-        pass
+        super(self.__class__, self).__init__(key=100*'d')
 
     def encode(self, plaintext: str, letters: str=string.ascii_lowercase) -> str:
         pattern = re.compile('[^a-zA-Z]')
-        cleansed = pattern.sub('', plaintext).lower()
-        return ''.join(letters[(letters.index(c)+3)%26] for c in cleansed)
+        return super(self.__class__, self).encode(pattern.sub('', plaintext).lower(), dirn=add)
 
     def decode(self, ciphertext: str) -> str:
-        return self.encode(plaintext=ciphertext, letters=string.ascii_lowercase[::-1])
+        return super(self.__class__, self).encode(ciphertext, dirn=sub)
