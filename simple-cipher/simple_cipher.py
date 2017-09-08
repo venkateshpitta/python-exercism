@@ -26,11 +26,11 @@ class Cipher(object):
 
 class Caesar(Cipher):
     def __init__(self):
-        super(self.__class__, self).__init__(key=100*'d')
+        super().__init__(key=100*'d')
 
     def encode(self, plaintext: str, letters: str=string.ascii_lowercase) -> str:
         pattern = re.compile('[^a-zA-Z]')
-        return super(self.__class__, self).encode(pattern.sub('', plaintext).lower(), dirn=add)
+        return super().encode(pattern.sub('', plaintext).lower(), dirn=add)
 
     def decode(self, ciphertext: str) -> str:
-        return super(self.__class__, self).encode(ciphertext, dirn=sub)
+        return super().encode(ciphertext, dirn=sub)
