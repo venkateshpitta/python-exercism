@@ -28,13 +28,10 @@ class Caesar(object):
     def __init__(self):
         pass
 
-    def encode(self, plaintext: str) -> str:
+    def encode(self, plaintext: str, letters: str=string.ascii_lowercase) -> str:
         pattern = re.compile('[^a-zA-Z]')
         cleansed = pattern.sub('', plaintext).lower()
-        letters = 'abcdefghijklmnopqrstuvwxyz'
         return ''.join(letters[(letters.index(c)+3)%26] for c in cleansed)
 
     def decode(self, ciphertext: str) -> str:
-        letters = 'abcdefghijklmnopqrstuvwxyz'[::-1]
-        return ''.join(letters[(letters.index(c)+3)%26] for c in ciphertext)
-        
+        return self.encode(plaintext=ciphertext, letters=string.ascii_lowercase[::-1])
