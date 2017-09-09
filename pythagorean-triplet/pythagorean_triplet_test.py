@@ -79,8 +79,8 @@ class PythagoreanTripletTest(unittest.TestCase):
     def test_is_triplet3(self):
         self.assertTrue(is_triplet((924, 43, 925)))
 
-    # def test_odd_number(self):
-    #     self.assertRaises(ValueError, primitive_triplets, 5)
+    def test_odd_number(self):
+        self.assertRaises(ValueError, primitive_triplets, 5)
 
 
 if __name__ == '__main__':
