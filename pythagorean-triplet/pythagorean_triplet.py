@@ -2,7 +2,7 @@ import math
 from typing import Tuple, List
 Triplet = Tuple[int, int, int]
 
-def primitive_triplets(n: int):# -> List[Triplet]:
+def primitive_triplets(n: int) -> List[Triplet]:
     if n%4 != 0:
         raise ValueError('Cannot find triplets starting with number non-divisible by 4')
 
