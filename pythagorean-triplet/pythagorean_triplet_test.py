@@ -62,13 +62,13 @@ class PythagoreanTripletTest(unittest.TestCase):
         ans = set([(175, 288, 337), (288, 20735, 20737)])
         self.assertEqual(primitive_triplets(288), ans)
 
-    # def test_range1(self):
-    #     ans = set([(3, 4, 5), (6, 8, 10)])
-    #     self.assertEqual(triplets_in_range(1, 10), ans)
+    def test_range1(self):
+        ans = set([(3, 4, 5), (6, 8, 10)])
+        self.assertEqual(triplets_in_range(1, 10), ans)
 
-    # def test_range2(self):
-    #     ans = set([(57, 76, 95), (60, 63, 87)])
-    #     self.assertEqual(triplets_in_range(56, 95), ans)
+    def test_range2(self):
+        ans = set([(57, 76, 95), (60, 63, 87)])
+        self.assertEqual(triplets_in_range(56, 95), ans)
 
     def test_is_triplet1(self):
         self.assertTrue(is_triplet((29, 20, 21)))
