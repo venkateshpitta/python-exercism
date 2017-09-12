@@ -22,7 +22,6 @@ def primitive_triplets(b: int) -> Set[Triplet]:
 def triplets_in_range(begin: int, end: int) -> Set[Triplet]:
     out = set()
     potential_bs = [b for b in range(begin, end+1) if b%4 == 0]
-    print(potential_bs)
     def factorise(num: int) -> Set[int]:
         limit = num+1
         factors = set()
