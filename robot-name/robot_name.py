@@ -6,6 +6,7 @@ class Robot(object):
         self._name = self._new_name()
 
     def _new_name(self):
+        random.seed()
         # return random.choices(string.ascii_uppercase, k=2) + random.choices(string.digits, k=3)
         return random.choice(string.ascii_uppercase) + random.choice(string.ascii_uppercase) +\
             random.choice(string.digits) + random.choice(string.digits) + random.choice(string.digits)
