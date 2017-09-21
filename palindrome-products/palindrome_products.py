@@ -1,20 +1,16 @@
-from typing import List, Set
+from typing import List, Set, Tuple
 
-def largest_palindrome(max_factor: int, min_factor: int=0) -> List[Set[int]]:
-    palindromes = []
-    for i in range(max_factor, min_factor, -1):
-        for j in range(max_factor, min_factor, -1):
-            p = i*j
-            if str(p) == str(p)[::-1]:
-                palindromes.append(p)
-    largest = max(palindromes)
-    factors = []
-    for i in range(1, largest//2+1):
-        if largest%i == 0:
-            pair = {i, largest//i}
-            factors.append(set((i, largest//i)))
-    return largest, factors
+def is_palindrome(num: int) -> bool:
+    return str(num) == str(num)[::-1]
 
+def all_products(finish: int, start: int=1) -> List[Tuple[int, Tuple[int, int]]]:
+    return [(i*j, (i, j)) for i in range(start, finish+1) for j in range(start, finish+1) if is_palindrome(i*j)]
+    # out = [(i*j, (i, j)) for i in range(start, finish+1) for j in range(start, finish+1) if is_palindrome(i*j)]
+    # print('out = {out}'.format(out=out))
+    # return out
 
-def smallest_palindrome():
-    pass
+def largest_palindrome(max_factor: int, min_factor: int=1) -> Tuple[int, Tuple[int, int]]:
+    return max([s for s in all_products(start=min_factor, finish=max_factor)], key=lambda x: x[0])
+
+def smallest_palindrome(max_factor: int, min_factor: int=1) -> Tuple[int, Tuple[int, int]]:
+    return min(all_products(start=min_factor, finish=max_factor), key=lambda x: x[0])
