@@ -1,16 +1,30 @@
-from typing import List, Union, Tuple
-import click
+from typing import Union, List
+import re
 
-Output = Union[Tuple[str], str]
+T1000 = Union[str, List[str]]
 
-@click.command()
-@click.argument('word', type=click.STRING, nargs=1)
-@click.argument('filenames', type=click.STRING, nargs=-1)
-@click.option('-n', type=click.BOOL, is_flag=True, default=False, help='Print the line number of each matching line.')
-@click.option('-i', type=click.BOOL, is_flag=True, default=False, help='Match line using a case-insensitive comparison.')
-@click.option('-l', type=click.BOOL, is_flag=True, default=False, help='Print only the names of files that contain at least one matching line.')
-@click.option('-x', type=click.BOOL, is_flag=True, default=False, help='Only match entire lines, instead of lines that contain a match.')
-@click.option('-v', type=click.BOOL, is_flag=True, default=False, help='Only match entire lines, instead of lines that contain a match.')
-def grep(word, filenames, n, i, l, x, v) -> Output:
-    pass
-
+def grep(word:str, files: T1000, options: str='') -> str:
+    out = ''
+    def helper(word: str, line: str) -> bool:
+        if '-i' in options:
+            word, line = word.lower(), line.lower()
+        if '-x' in options:
+            out = re.match(word+'$', line)
+        else:
+            out = re.findall(word, line)
+        if '-v' in options:
+            return not out
+        return out
+    for fname in files:
+        with open(fname, 'r') as current:
+            for linum, line in enumerate(current):
+                if helper(word, line):
+                    if '-l' in options:
+                        out += fname + '\n'
+                        break
+                    if len(files) > 1:
+                        out += fname + ':'
+                    if '-n' in options:
+                        out += '{}:'.format(linum+1)
+                    out += line
+    return out
