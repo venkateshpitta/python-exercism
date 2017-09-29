@@ -1,3 +1,4 @@
+import math
 from typing import Union
 
 number = Union[int, float]
@@ -20,6 +21,7 @@ class ComplexNumber(object):
         return ComplexNumber((self.real - other.real), (self.imaginary - other.imaginary))
 
     def div(self, other):
+        ## What is wrong here? test_multiply_numbers_with_real_and_imaginary_part(self): always fails
         assert(isinstance(other, ComplexNumber))
         den = other.real**2 + other.imaginary**2
         r = self.real * other.real + self.imaginary * other.imaginary
@@ -33,4 +35,5 @@ class ComplexNumber(object):
         return ComplexNumber(self.real, -1*self.imaginary)
 
     def exp(self):
-        pass
+        return ComplexNumber((math.exp(self.real) * math.cos(self.imaginary)),
+                             int(math.exp(self.real) * math.sin(self.imaginary)))

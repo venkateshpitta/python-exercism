@@ -67,11 +67,11 @@ class ComplexNumbersTest(unittest.TestCase):
         self.assertEqual(first_input.mul(second_input).real, 2)
         self.assertEqual(first_input.mul(second_input).imaginary, 0)
 
-    # def test_multiply_numbers_with_real_and_imaginary_part(self):
-    #     first_input = ComplexNumber(1, 2)
-    #     second_input = ComplexNumber(-5, 10)
-    #     self.assertEqual(first_input.mul(second_input).real, -5)
-    #     self.assertEqual(first_input.mul(second_input).imaginary, 20)
+    def test_multiply_numbers_with_real_and_imaginary_part(self):
+        first_input = ComplexNumber(1, 2)
+        second_input = ComplexNumber(-5, 10)
+        self.assertEqual(first_input.mul(second_input).real, -5)
+        self.assertEqual(first_input.mul(second_input).imaginary, 20)
 
     def test_divide_purely_real_numbers(self):
         input_number = ComplexNumber(1.0, 0.0)
@@ -133,23 +133,23 @@ class ComplexNumbersTest(unittest.TestCase):
         self.assertEqual(expected.imaginary,
                          input_number.conjugate().imaginary)
 
-    # def test_eulers_identity_formula(self):
-    #     input_number = ComplexNumber(0, math.pi)
-    #     expected = ComplexNumber(-1, 0)
-    #     self.assertEqual(expected.real, input_number.exp().real)
-    #     self.assertEqual(expected.imaginary, input_number.exp().imaginary)
+    def test_eulers_identity_formula(self):
+        input_number = ComplexNumber(0, math.pi)
+        expected = ComplexNumber(-1, 0)
+        self.assertEqual(expected.real, input_number.exp().real)
+        self.assertEqual(expected.imaginary, input_number.exp().imaginary)
 
-    # def test_exponential_of_0(self):
-    #     input_number = ComplexNumber(0, 0)
-    #     expected = ComplexNumber(1, 0)
-    #     self.assertEqual(expected.real, input_number.exp().real)
-    #     self.assertEqual(expected.imaginary, input_number.exp().imaginary)
+    def test_exponential_of_0(self):
+        input_number = ComplexNumber(0, 0)
+        expected = ComplexNumber(1, 0)
+        self.assertEqual(expected.real, input_number.exp().real)
+        self.assertEqual(expected.imaginary, input_number.exp().imaginary)
 
-    # def test_exponential_of_a_purely_real_number(self):
-    #     input_number = ComplexNumber(1, 0)
-    #     expected = ComplexNumber(math.e, 0)
-    #     self.assertEqual(expected.real, input_number.exp().real)
-    #     self.assertEqual(expected.imaginary, input_number.exp().imaginary)
+    def test_exponential_of_a_purely_real_number(self):
+        input_number = ComplexNumber(1, 0)
+        expected = ComplexNumber(math.e, 0)
+        self.assertEqual(expected.real, input_number.exp().real)
+        self.assertEqual(expected.imaginary, input_number.exp().imaginary)
 
 
 if __name__ == '__main__':
